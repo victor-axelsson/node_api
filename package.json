@@ -1,0 +1,19 @@
+{
+  "name": "cms_api",
+  "description": "Backend for CMS system",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "body-parser": "*",
+    "cors": "*",
+    "crypto": "0.0.3",
+    "defaults": "^1.0.3",
+    "express": "*",
+    "jsonwebtoken": "^5.4.1",
+    "mongoose": "*",
+    "sha1": "~1.1.1"
+  },
+  "scripts": {
+    "start": "PORT=3000 nodemon src/server.js"
+  }
+}
