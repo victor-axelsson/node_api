@@ -2,9 +2,15 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import Endpoint from './v1/endpoint';
+import dbBuilder from './v1/dal/dbBuilder';
 
 export default class App {
-    setup() {
+    async setup() {
+        await this.setupDB();
+        await this.startAPI();
+    }
+
+    async startAPI() {
         require('dotenv').config();
 
         const app = express();
@@ -23,5 +29,10 @@ export default class App {
         }
 
         app.listen(process.env.PORT);
+    }
+
+    async setupDB() {
+        const db = dbBuilder.mysqlDB();
+        db.setup();
     }
 }

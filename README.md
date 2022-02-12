@@ -10,3 +10,8 @@ Simple API template in nodejs with Alpine pm2 Dockerfile
 
 # Development
 When setup you will need to implement your repository. Start by diving into the `src/v1/models` folder. 
+
+# Migration
+
+Create a new migration
+-  `NAME=myMigration nom run create_migration`
