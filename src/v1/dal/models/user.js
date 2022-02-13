@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
-import constants from '../dal/constants';
-import crypto from '../lib/crypto';
+import constants from '../constants';
+import crypto from '../../lib/crypto';
+
 class User extends Model {
     static doInit(sequelize) {
         User.init({
@@ -41,8 +42,8 @@ class User extends Model {
                 allowNull: false,
                 type: DataTypes.INTEGER
             },
-            createdAt: `TIMESTAMP`,
-            updatedAt: `TIMESTAMP`
+            createdAt: constants.DATA_TYPES.TIMESTAMP,
+            updatedAt: constants.DATA_TYPES.TIMESTAMP
         }, {
             sequelize
         });

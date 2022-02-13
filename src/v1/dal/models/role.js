@@ -1,4 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
+import constants from '../constants';
 
 class Role extends Model {
     static doInit(sequelize) {
@@ -12,8 +13,8 @@ class Role extends Model {
             name: DataTypes.STRING,
             description: DataTypes.STRING,
             bit: DataTypes.INTEGER,
-            createdAt: `TIMESTAMP`,
-            updatedAt: `TIMESTAMP`
+            createdAt: constants.DATA_TYPES.TIMESTAMP,
+            updatedAt: constants.DATA_TYPES.TIMESTAMP
         }, { sequelize });
         return Role;
     }

@@ -2,17 +2,16 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import Endpoint from './v1/endpoint';
-import dbBuilder from './v1/dal/dbBuilder';
+import config from './v1/lib/config';
 
 export default class App {
     async setup() {
+        await config.init();
         await this.setupDB();
         await this.startAPI();
     }
 
     async startAPI() {
-        require('dotenv').config();
-
         const app = express();
         app.use(bodyParser.json({ limit: '50mb' }));
         app.use(cors());
@@ -21,7 +20,6 @@ export default class App {
         const endpoints = endpointLoader.load();
 
         for (var route of endpoints) {
-            console.log(route, route.httpMethod, route.path, route.executor);
             if (route.middleware)
                 app[route.httpMethod](route.path, route.middleware, route.executor.execute);
             else
@@ -32,6 +30,8 @@ export default class App {
     }
 
     async setupDB() {
+        // This needs to be lazy loaded because of singlton patter making somme configs be missing
+        const dbBuilder = require('./v1/dal/dbBuilder').default;
         const db = dbBuilder.mysqlDB();
         db.setup();
     }

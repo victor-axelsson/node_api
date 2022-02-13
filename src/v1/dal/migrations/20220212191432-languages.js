@@ -1,25 +1,27 @@
 const constants = require("../constants");
 
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable(constants.TABLES.USERS, {
-    userId: {
-      field: constants.PRIMARY_KEYS.USERS,
+  up: (queryInterface, Sequelize) => queryInterface.createTable(constants.TABLES.LANGUAGES, {
+    languageId: {
+      field: constants.PRIMARY_KEYS.LANGUAGES,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER
     },
-    firstName: {
-      type: Sequelize.STRING
-    },
-    lastName: {
-      type: Sequelize.STRING
-    },
-    email: {
+    name: {
       type: Sequelize.STRING,
-      unique: true
+      allowNull: false
     },
-    blocked: {
+    codeISO2: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    codeISO3: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    enabled: {
       type: Sequelize.BOOLEAN,
       defaultValue: false,
       allowNull: false
@@ -35,6 +37,6 @@ module.exports = {
       allowNull: false
     }
   }).then(() => queryInterface.sequelize
-    .query(`ALTER TABLE \`${constants.TABLES.USERS}\` CONVERT TO CHARACTER SET \`utf8\` COLLATE \`utf8_unicode_ci\`;`)),
-  down: queryInterface => queryInterface.dropTable(constants.TABLES.USERS)
+    .query(`ALTER TABLE \`${constants.TABLES.LANGUAGES}\` CONVERT TO CHARACTER SET \`utf8\` COLLATE \`utf8_unicode_ci\`;`)),
+  down: queryInterface => queryInterface.dropTable(constants.TABLES.LANGUAGES)
 };

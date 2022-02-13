@@ -24,7 +24,12 @@ class DbBuilder {
             }
         };
 
-        return new Dal(dbCOnfig);
+        this._db = new Dal(dbCOnfig);
+        return this._db;
+    }
+
+    get DAL() {
+        return this._db;
     }
 }
 
